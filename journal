@@ -37,4 +37,4 @@ then
   PATTERN=$(date "+%Y-%m-%d")
 fi
 
-cat $JOURNAL_DATA_FILE | grep -E $PATTERN
+grep -E "$PATTERN" $JOURNAL_DATA_FILE 
