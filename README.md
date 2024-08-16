@@ -1,25 +1,27 @@
 # Journal 
 Journal whatever you like. Keep them easily reachable with search.
 
-Journal is a bash script! It uses simple command-line tools to give a bare
-bones journaling capabilities.
-
 ## Dependencies
-This script only requires basic command line tools like `grep` and `echo`
-and a shell like `sh`, `bash`, or such. If yours is a Unix-like system, you
-are good to go!
+This is a program written in go. As such you need to have Golang installed on
+your system to build this.
 
-On Windows you'd need to install WSL.
+### Steps to build
+1. Clone this repository and `cd` into it
+2. Run command `go build`
+3. [Optional] Run `sudo install -m 755 ./journal /usr/local/bin`
+
+The last step would install the executable into the directory `usr/local/bin` 
+so that you don't need to provide the full path to run the program everytime.
 
 ## Init
-Just download the file `journal` and copy it to your path. This would be 
-`/usr/local/bin` in general!
-
 ENVIRONMENT variable 'JOURNAL_DATA_FILE' needs to be setup and should 
 contain the file path where journal would write to.
 
-Type in `journal` and if the program exits without an error you're all
-set.
+Here's an example command to setup the env value and persist it for future.
+
+`echo -e '#Journal ENV\nexport JOURNAL_DATA_FILE=~/.local/journal\n' >> ~/.bashrc`
+
+this assumes you have `bash` as your terminal Shell.
 
 ## Posting to the journal
 Posting to the journal is simple. Just the type in following command.
@@ -46,19 +48,19 @@ You need to search for it
 Journal uses extended Regex pattern to search posts. The following
 command is the basic structure for the search post feature
 
-`journal -f <REGEX_PATTERN_HERE>`
+`journal <REGEX_PATTERN_HERE> [...<MORE_REGEX_PATTERNS>]`
 
 ### Examples
 
-1. list all posts mentioning `bash scripting` type in 
+1. list all posts mentioning `bash` or `scripting` type in 
     
-    `journal -f 'bash scripting'`
-2. list all posts made on 24th of April
+    `journal bash scripting`
+2. list all posts mentioning exactly `bash scripting` type in 
+
+    `journal 'bash scripting'`
+3. list all posts made on 24th of April
     
-    `journal -f '04-24'`
-3. list all posts containing the word 'review' or 'github'
-    
-    `journal -f 'review|github'`
+    `journal '04-24'`
 
 ## Moving the datafile
 Journal uses plain text file to store journal posts. You can view,
